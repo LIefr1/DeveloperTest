@@ -1,33 +1,54 @@
 namespace Library
 {
-    public class ZadanieOne
+    public class Task1
     {
-        public void One()
+
+        public static string GetEnummerateString(int EnumurateLenght)
+        {
+            if (EnumurateLenght != 0)
+            {
+                return string.Join(", ", Enumerable.Range(1, EnumurateLenght)) + ".";
+            }
+
+            throw new ArgumentException();
+        }
+
+
+        public void ConsoleOut()
         {
             Console.Write("Введите число N: ");
-            int n = int.Parse(Console.ReadLine());
-            string result = string.Join(", ", Enumerable.Range(1, n));
-            Console.WriteLine(result);
+            Console.WriteLine(GetEnummerateString(int.Parse(Console.ReadLine())));
         }
     }
-    public class ZadanieTwo
+    public class Task2
     {
-        public static void Two()
+        /// <summary>
+        /// Возвращает строку с квадратом из "решеток"
+        /// </summary>
+        /// <param name="SideLength">должен быть не чётным и больше 3</param>
+        /// <returns></returns>
+        public static string GetSharpSquare(int SideLength)
+        {
+            if (SideLength > 3 && SideLength % 2 != 0)
+            {
+                string result = "";
+                for (int row = 1; row <= SideLength; row++)
+                {
+                    for (int col = 1; col <= SideLength; col++)
+                    {
+                        if (row == SideLength / 2 + 1 && col == SideLength / 2 + 1) result += " ";
+                        else result += "#";
+                    }
+                    result += "\n";
+                }
+                return result;
+            }
+            throw new ArgumentException();
+        }
+        public static void ConsoleOut()
         {
             Console.Write("Введите нечетное число N: ");
-            int n = int.Parse(Console.ReadLine());
-            if (n % 2 == 0) // If N is an even number, exit the function.
-            {
-                Console.WriteLine("Вы ввели четное N.");
-                return;
-            }            
-            for (int row = 1; row <= n; row++) {
-                for (int col = 1; col <= n; col++) {
-                    if (row == n / 2 + 1 && col == n / 2 + 1) Console.Write(" ");
-                    else Console.Write("#");                    
-                }
-                Console.WriteLine();
-            }
+            Console.WriteLine(GetSharpSquare(int.Parse(Console.ReadLine())));
         }
     }
 }
